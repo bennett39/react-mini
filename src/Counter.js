@@ -7,26 +7,18 @@ class Counter extends Component {
       counter: 0,
     };
   }
+  handleClick(incr) {
+    const newVal = this.state.counter + incr
+    this.setState({counter: newVal});
+  }
   render () {
     return (
       <div>
         <h2>{this.state.counter}</h2>
-        <button onClick={() => (
-            this.setState(
-              (state) => (
-                {counter: state.counter + 1,}
-              )
-            )
-        )}>
+        <button onClick={() => this.handleClick(1)}>
           +
         </button>
-        <button onClick={() => (
-            this.setState(
-              (state) => (
-                {counter: state.counter - 1,}
-              )
-            )
-        )}>
+        <button onClick={() => this.handleClick(-1)}>
           -
         </button>
       </div>
