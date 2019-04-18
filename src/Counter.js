@@ -19,11 +19,14 @@ class Counter extends Component {
     />
   }
   render () {
+    const buttons = [-5, -2, -1, 1, 2, 5];
+    const buttonList = buttons.map((button) =>
+      <React.Fragment>{this.renderButton(button)}</React.Fragment>
+    );
     return (
       <div>
         <h2>{this.state.counter}</h2>
-        {this.renderButton(-1)}
-        {this.renderButton(1)}
+        {buttonList}
       </div>
     );
   }
