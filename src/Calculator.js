@@ -83,7 +83,7 @@ class Calculator extends Component {
       this.setState({total: val});
     } else {
       const newTotal = operation(this.state.total, val);
-      this.setState({total: newTotal});
+      this.setState({total: newTotal, operation: null});
     }
   }
 
