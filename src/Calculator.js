@@ -90,7 +90,7 @@ class Calculator extends Component {
   render () {
     return (
       <div>
-        <h3>Calculator</h3>
+        <h3>Single-Digit Calculator</h3>
         <p className="lead">{this.state.total}</p>
         <div className="row">
           <div className="col">

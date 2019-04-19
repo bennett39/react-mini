@@ -11,8 +11,11 @@ class App extends Component {
       <div className="container">
         <HelloWorld />
         <p>This is a <a href="https://google.com">link</a>.</p>
+        <hr />
         <Items />
+        <hr />
         <Counter />
+        <hr />
         <Calculator />
       </div>
     );
