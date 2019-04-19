@@ -2,7 +2,10 @@ import React from 'react';
 
 function IncrButton(props) {
   return (
-    <button onClick={() => props.onClick()}>
+    <button
+      key={props.incr}
+      onClick={() => props.onClick()}
+    >
     {props.incr}
     </button>
   );

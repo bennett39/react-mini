@@ -21,7 +21,7 @@ class Counter extends Component {
   render () {
     const buttons = [-5, -2, -1, 1, 2, 5];
     const buttonList = buttons.map((button) =>
-      <React.Fragment>{this.renderButton(button)}</React.Fragment>
+      <React.Fragment key={button}>{this.renderButton(button)}</React.Fragment>
     );
     return (
       <div>
