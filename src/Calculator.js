@@ -50,10 +50,28 @@ class Calculator extends Component {
 
   renderRows () {
     const rows = [0, 1, 2, 3];
-    const rowButtons = rows.map(
-      (row) => <div className="row" key={row}>{this.renderNumbers(row)}</div>
+    const rowButtons = rows.map((row) =>
+      <div className="row" key={row}>{this.renderNumbers(row)}</div>
     );
     return rowButtons;
+  }
+
+  renderOperators () {
+    const operators = [
+      {operator: "+", func: this.add},
+      {operator: "-", func: this.subtract},
+      {operator: "*", func: this.multiply},
+      {operator: "/", func: this.divide},
+    ];
+    const operatorButtons = operators.map((op) =>
+      <div className="row">
+        <OperationButton
+          onClick={() => this.setOperation(op['func'])}
+          operator={op['operator']}
+        />
+      </div>
+    );
+    return operatorButtons;
   }
 
   setOperation (operation) {
@@ -61,8 +79,12 @@ class Calculator extends Component {
   }
 
   setTotal (operation, val) {
-    const newTotal = operation(this.state.total, val);
-    this.setState({total: newTotal});
+    if (!operation) {
+      this.setState({total: val});
+    } else {
+      const newTotal = operation(this.state.total, val);
+      this.setState({total: newTotal});
+    }
   }
 
   render () {
@@ -75,30 +97,7 @@ class Calculator extends Component {
             {this.renderRows()}
           </div>
           <div className="col">
-            <div className="row">
-              <OperationButton
-                onClick={() => this.setOperation(this.add)}
-                operator="+"
-              />
-            </div>
-            <div className="row">
-              <OperationButton
-                onClick={() => this.setOperation(this.subtract)}
-                operator="-"
-              />
-            </div>
-            <div className="row">
-              <OperationButton
-                onClick={() => this.setOperation(this.multiply)}
-                operator="*"
-              />
-            </div>
-            <div className="row">
-              <OperationButton
-                onClick={() => this.setOperation(this.divide)}
-                operator="/"
-              />
-            </div>
+            {this.renderOperators()}
           </div>
         </div>
       </div>
