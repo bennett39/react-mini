@@ -11,6 +11,17 @@ function NumberButton(props) {
   );
 }
 
+function OperationButton(props) {
+  return (
+    <button
+      onClick={() => props.onClick()}
+      className="btn btn-primary"
+    >
+      {props.operator}
+    </button>
+  );
+}
+
 class Calculator extends Component {
   constructor (props) {
     super(props);
@@ -19,21 +30,24 @@ class Calculator extends Component {
       operation: null,
     };
   }
-  handleClick (val) {
-    const newTotal = this.state.total + val;
-    this.setState({total: newTotal});
-  }
+
+  add (curVal, newVal) { return curVal + newVal; }
+  subtract (curVal, newVal) { return curVal - newVal; }
+  multiply (curVal, newVal) { return curVal * newVal; }
+  divide (curVal, newVal) { return curVal / newVal; }
+
   renderNumbers (i) {
     const numbers = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [0]];
     const buttons = numbers[i].map((number) =>
       <NumberButton
         key={number}
         val={number}
-        onClick={() => this.handleClick(number)}
+        onClick={() => this.setTotal(this.state.operation, number)}
       />
     );
     return buttons;
   }
+
   renderRows () {
     const rows = [0, 1, 2, 3];
     const rowButtons = rows.map(
@@ -41,9 +55,16 @@ class Calculator extends Component {
     );
     return rowButtons;
   }
+
   setOperation (operation) {
     this.setState({operation: operation,})
   }
+
+  setTotal (operation, val) {
+    const newTotal = operation(this.state.total, val);
+    this.setState({total: newTotal});
+  }
+
   render () {
     return (
       <div>
@@ -55,19 +76,28 @@ class Calculator extends Component {
           </div>
           <div className="col">
             <div className="row">
-              <button
-                className="btn btn-primary m-1"
-                onClick={() => this.setOperation("abc")}
-              >
-                +
-              </button>
+              <OperationButton
+                onClick={() => this.setOperation(this.add)}
+                operator="+"
+              />
             </div>
             <div className="row">
-              <button
-                className="btn btn-primary m-1"
-              >
-                +
-              </button>
+              <OperationButton
+                onClick={() => this.setOperation(this.subtract)}
+                operator="-"
+              />
+            </div>
+            <div className="row">
+              <OperationButton
+                onClick={() => this.setOperation(this.multiply)}
+                operator="*"
+              />
+            </div>
+            <div className="row">
+              <OperationButton
+                onClick={() => this.setOperation(this.divide)}
+                operator="/"
+              />
             </div>
           </div>
         </div>
