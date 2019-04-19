@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 
 function NumberButton(props) {
   return (
-    <button onClick={() => props.onClick()}>
+    <button
+      onClick={() => props.onClick()}
+      className="btn"
+    >
       {props.val}
     </button>
   );
@@ -13,6 +16,7 @@ class Calculator extends Component {
     super(props);
     this.state = {
       total: 0,
+      operation: null,
     };
   }
   handleClick (val) {
@@ -37,12 +41,36 @@ class Calculator extends Component {
     );
     return rowButtons;
   }
+  setOperation (operation) {
+    this.setState({operation: operation,})
+  }
   render () {
     return (
       <div>
         <h3>Calculator</h3>
-        <p>{this.state.total}</p>
-        {this.renderRows()}
+        <p className="lead">{this.state.total}</p>
+        <div className="row">
+          <div className="col">
+            {this.renderRows()}
+          </div>
+          <div className="col">
+            <div className="row">
+              <button
+                className="btn btn-primary m-1"
+                onClick={() => this.setOperation("abc")}
+              >
+                +
+              </button>
+            </div>
+            <div className="row">
+              <button
+                className="btn btn-primary m-1"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

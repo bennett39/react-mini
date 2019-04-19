@@ -2,3 +2,8 @@
   width: 500px;
   margin: 0 auto;
 }
+
+.flex-child {
+  float: left;
+  margin: 5px;
+}
